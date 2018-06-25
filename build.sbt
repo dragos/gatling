@@ -19,10 +19,13 @@ lazy val root = Project("gatling-parent", file("."))
 
 // Modules
 
+resolvers += "Triplequote Maven Repo" at "https://repo.triplequote.com/artifactory/libs-release"
+
 def gatlingModule(id: String) = Project(id, file(id))
   .enablePlugins(AutomateHeaderPlugin, SonatypeReleasePlugin)
   .settings(gatlingModuleSettings: _*)
   .settings(updateOptions := updateOptions.value.withGigahorse(false))
+  .settings(resolvers += "Triplequote Maven Repo" at "https://repo.triplequote.com/artifactory/libs-release")
 
 lazy val nettyUtil = gatlingModule("gatling-netty-util")
   .settings(libraryDependencies ++= nettyUtilDependencies)
